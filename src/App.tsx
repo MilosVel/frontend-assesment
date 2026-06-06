@@ -1,4 +1,3 @@
-// import './App.css'
 import { ContentLayout } from '@/components/layout/content-layout'
 import BillsPage from '@/pages/bills-page'
 

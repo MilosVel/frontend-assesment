@@ -4,7 +4,6 @@ import {
   QueryClientProvider,
   QueryErrorResetBoundary,
 } from '@tanstack/react-query';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { useState } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
 import { toast } from 'sonner';
@@ -32,7 +31,6 @@ export function AppProvider({ children }: AppProviderProps) {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {import.meta.env.DEV && <ReactQueryDevtools />}
 
       <QueryErrorResetBoundary>
         {({ reset }) => (
