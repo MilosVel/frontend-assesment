@@ -23,8 +23,8 @@ export default function BillsPage() {
 
     const { filters, setFilter } = useFilters({
         initialFilters: {
-            bill_source: [],
-            bill_status: null,
+            bill_source: [] as string[],
+            bill_status: null as string | null,
         },
     });
 
@@ -37,7 +37,7 @@ export default function BillsPage() {
     });
 
     const { favourites, toggleFavourite, favouriteRows } =
-        useFavourites(legislationData);
+        useFavourites();
 
     const billColumns = createBillColumns({
         favourites,

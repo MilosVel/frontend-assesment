@@ -3,10 +3,7 @@ import { describe, expect, it } from "vitest";
 import { useFavourites } from "@/features/hooks/use-favourites";
 import type { ILegislationItem } from "@/api/legislation/dto/legislation-dto";
 
-const makeBill = (
-    billNo: string,
-    billYear: string
-): ILegislationItem => ({
+const makeBill = (billNo: string, billYear: string): ILegislationItem => ({
     bill: {
         billNo,
         billYear,
@@ -47,11 +44,7 @@ describe("useFavourites", () => {
     });
 
     it("adds a favourite", () => {
-        const { result } = renderHook(() =>
-            useFavourites({
-                results: [bill1, bill2],
-            })
-        );
+        const { result } = renderHook(() => useFavourites());
 
         act(() => {
             result.current.toggleFavourite(bill1);
@@ -62,11 +55,7 @@ describe("useFavourites", () => {
     });
 
     it("removes a favourite when toggled twice", () => {
-        const { result } = renderHook(() =>
-            useFavourites({
-                results: [bill1, bill2],
-            })
-        );
+        const { result } = renderHook(() => useFavourites());
 
         act(() => {
             result.current.toggleFavourite(bill1);
@@ -81,11 +70,7 @@ describe("useFavourites", () => {
     });
 
     it("supports multiple favourites", () => {
-        const { result } = renderHook(() =>
-            useFavourites({
-                results: [bill1, bill2],
-            })
-        );
+        const { result } = renderHook(() => useFavourites());
 
         act(() => {
             result.current.toggleFavourite(bill1);
@@ -100,11 +85,7 @@ describe("useFavourites", () => {
     });
 
     it("returns only favourited rows", () => {
-        const { result } = renderHook(() =>
-            useFavourites({
-                results: [bill1, bill2],
-            })
-        );
+        const { result } = renderHook(() => useFavourites());
 
         act(() => {
             result.current.toggleFavourite(bill2);

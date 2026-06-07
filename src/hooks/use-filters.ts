@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 
-export type GlobalFilters = Record<string, any>;
+export type GlobalFilters = Record<string, string | string[] | null>;
 
 export function useFilters<T extends GlobalFilters>({
     initialFilters,

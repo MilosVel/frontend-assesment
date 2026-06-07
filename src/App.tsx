@@ -1,5 +1,8 @@
+import { lazy } from 'react'
+
 import { ContentLayout } from '@/components/layout/content-layout'
-import BillsPage from '@/pages/bills-page'
+
+const BillsPage = lazy(() => import('@/pages/bills-page'))
 
 function App() {
 

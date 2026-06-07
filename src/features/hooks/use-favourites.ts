@@ -1,20 +1,10 @@
-import { useEffect, useMemo, useState, useRef } from "react";
+import { useState, useMemo } from "react";
 import type { ILegislationItem } from "@/api/legislation/dto/legislation-dto";
 
-export function useFavourites(legislationData?: { results: ILegislationItem[] }) {
-    const [favourites, setFavourites] = useState<Set<string>>(() => new Set());
-    const cacheRef = useRef<Record<string, ILegislationItem>>({});
-
-    useEffect(() => {
-        if (!legislationData?.results) return;
-
-
-        legislationData.results.forEach(item => {
-            const id = `${item.bill.billNo}-${item.bill.billYear}`;
-            cacheRef.current[id] = item;
-        });
-
-    }, [legislationData?.results]);
+export function useFavourites() {
+    const [favourites, setFavourites] = useState<Map<string, ILegislationItem>>(
+        () => new Map()
+    );
 
     const toggleFavourite = (item: ILegislationItem) => {
         const id = `${item.bill.billNo}-${item.bill.billYear}`;
@@ -22,26 +12,22 @@ export function useFavourites(legislationData?: { results: ILegislationItem[] })
         console.log("Dispatch favourite request:", id);
 
         setFavourites(prev => {
-            const next = new Set(prev);
-
+            const next = new Map(prev);
             if (next.has(id)) {
                 next.delete(id);
             } else {
-                next.add(id);
+                next.set(id, item);
             }
-
             return next;
         });
     };
-    const favouriteRows = useMemo(() => {
-        return Array.from(favourites)
-            .map(id => cacheRef.current[id])
-            .filter(Boolean);
-    }, [favourites]);
 
+    const favouriteIds = useMemo(() => new Set(favourites.keys()), [favourites]);
+
+    const favouriteRows = useMemo(() => Array.from(favourites.values()), [favourites]);
 
     return {
-        favourites,
+        favourites: favouriteIds,
         toggleFavourite,
         favouriteRows,
     };

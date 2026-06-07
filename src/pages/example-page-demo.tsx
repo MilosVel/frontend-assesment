@@ -71,7 +71,8 @@ export default function ExamplePage() {
 
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
-    const [selectedBill, setSelectedBill] = useState<Data | null>(null);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const [_selectedBill, setSelectedBill] = useState<Data | null>(null);
 
 
     return (

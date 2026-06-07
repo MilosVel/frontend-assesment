@@ -3,6 +3,7 @@ import userEvent from "@testing-library/user-event";
 import { describe, it, expect, vi } from "vitest";
 
 import { TableComponent } from "@/components/table/table";
+import type { Column } from "@/components/table/table";
 
 type User = {
     id: number;
@@ -14,9 +15,9 @@ const rows: User[] = [
     { id: 2, name: "John" },
 ];
 
-const columns = [
+const columns: Column<User>[] = [
     {
-        id: "name" as keyof User,
+        id: "name",
         label: "Name",
     },
 ];

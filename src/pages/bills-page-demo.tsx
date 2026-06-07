@@ -28,7 +28,7 @@ export default function BillsPage() {
     console.log("Favourite bill:", favouriteBill);
 
 
-    const { filters, setFilter } = useFilters({
+    const { filters } = useFilters({
         initialFilters: {
             bill_source: [],
             bill_status: null,
