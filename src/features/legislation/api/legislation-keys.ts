@@ -1,6 +1,6 @@
 export const legislationKeys = {
-    base: ['legislation'] as const,
+  base: ['legislation'] as const,
 
-    list: (filters: string) =>
-        [...legislationKeys.base, 'list', filters] as const,
+  list: (filters: string) =>
+    [...legislationKeys.base, 'list', filters] as const,
 };

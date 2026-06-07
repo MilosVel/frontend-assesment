@@ -5,15 +5,13 @@ import { legislationKeys } from '@/features/legislation/api/legislation-keys';
 import type { IGetLegislationParams } from '@/api/legislation/dto/legislation-dto';
 
 function getLegislations(params: IGetLegislationParams) {
-    return legislationApi.getLegislation(params);
+  return legislationApi.getLegislation(params);
 }
 
 export function useGetLegislations(params: IGetLegislationParams) {
-    return useQuery({
-        queryKey: legislationKeys.list(
-            JSON.stringify(params),
-        ),
-        queryFn: () => getLegislations(params),
-        placeholderData: keepPreviousData
-    });
+  return useQuery({
+    queryKey: legislationKeys.list(JSON.stringify(params)),
+    queryFn: () => getLegislations(params),
+    placeholderData: keepPreviousData,
+  });
 }

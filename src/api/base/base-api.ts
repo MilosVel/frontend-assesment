@@ -8,7 +8,6 @@ export class BaseApi {
       baseURL: `${import.meta.env.VITE_APP_API_URL}`,
       withCredentials: false,
     });
-
   }
 
   protected getAxiosInstance() {

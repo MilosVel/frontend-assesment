@@ -1,67 +1,67 @@
-import { renderHook, act } from "@testing-library/react";
-import { describe, it, expect } from "vitest";
-import { useFilters } from "@/hooks/use-filters";
+import { renderHook, act } from '@testing-library/react';
+import { describe, it, expect } from 'vitest';
+import { useFilters } from '@/hooks/use-filters';
 
 const initialFilters = {
-    bill_source: [] as string[],
-    bill_status: null as string | null,
+  bill_source: [] as string[],
+  bill_status: null as string | null,
 };
 
-describe("useFilters", () => {
-    it("returns initial filters", () => {
-        const { result } = renderHook(() => useFilters({ initialFilters }));
-        expect(result.current.filters).toEqual(initialFilters);
+describe('useFilters', () => {
+  it('returns initial filters', () => {
+    const { result } = renderHook(() => useFilters({ initialFilters }));
+    expect(result.current.filters).toEqual(initialFilters);
+  });
+
+  it('sets a single filter', () => {
+    const { result } = renderHook(() => useFilters({ initialFilters }));
+
+    act(() => {
+      result.current.setFilter('bill_status', 'Current');
     });
 
-    it("sets a single filter", () => {
-        const { result } = renderHook(() => useFilters({ initialFilters }));
+    expect(result.current.filters.bill_status).toBe('Current');
+  });
 
-        act(() => {
-            result.current.setFilter("bill_status", "Current");
-        });
+  it('sets filters in bulk', () => {
+    const { result } = renderHook(() => useFilters({ initialFilters }));
 
-        expect(result.current.filters.bill_status).toBe("Current");
+    act(() => {
+      result.current.setFilters({
+        bill_source: ['Government'],
+        bill_status: 'Enacted',
+      });
     });
 
-    it("sets filters in bulk", () => {
-        const { result } = renderHook(() => useFilters({ initialFilters }));
+    expect(result.current.filters.bill_source).toEqual(['Government']);
+    expect(result.current.filters.bill_status).toBe('Enacted');
+  });
 
-        act(() => {
-            result.current.setFilters({
-                bill_source: ["Government"],
-                bill_status: "Enacted",
-            });
-        });
+  it('resets filters to initial values', () => {
+    const { result } = renderHook(() => useFilters({ initialFilters }));
 
-        expect(result.current.filters.bill_source).toEqual(["Government"]);
-        expect(result.current.filters.bill_status).toBe("Enacted");
+    act(() => {
+      result.current.setFilter('bill_status', 'Current');
     });
 
-    it("resets filters to initial values", () => {
-        const { result } = renderHook(() => useFilters({ initialFilters }));
-
-        act(() => {
-            result.current.setFilter("bill_status", "Current");
-        });
-
-        act(() => {
-            result.current.resetFilters();
-        });
-
-        expect(result.current.filters).toEqual(initialFilters);
+    act(() => {
+      result.current.resetFilters();
     });
 
-    it("removes a single filter back to initial value", () => {
-        const { result } = renderHook(() => useFilters({ initialFilters }));
+    expect(result.current.filters).toEqual(initialFilters);
+  });
 
-        act(() => {
-            result.current.setFilter("bill_status", "Current");
-        });
+  it('removes a single filter back to initial value', () => {
+    const { result } = renderHook(() => useFilters({ initialFilters }));
 
-        act(() => {
-            result.current.removeFilter("bill_status");
-        });
-
-        expect(result.current.filters.bill_status).toBeNull();
+    act(() => {
+      result.current.setFilter('bill_status', 'Current');
     });
+
+    act(() => {
+      result.current.removeFilter('bill_status');
+    });
+
+    expect(result.current.filters.bill_status).toBeNull();
+  });
 });

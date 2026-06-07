@@ -1,16 +1,15 @@
-import { lazy } from 'react'
+import { lazy } from 'react';
 
-import { ContentLayout } from '@/components/layout/content-layout'
+import { ContentLayout } from '@/components/layout/content-layout';
 
-const BillsPage = lazy(() => import('@/pages/bills-page'))
+const BillsPage = lazy(() => import('@/pages/bills-page'));
 
 function App() {
-
   return (
-    <ContentLayout title='Bills'>
+    <ContentLayout title="Bills">
       <BillsPage />
     </ContentLayout>
-  )
+  );
 }
 
-export default App
+export default App;

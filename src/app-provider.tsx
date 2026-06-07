@@ -31,7 +31,6 @@ export function AppProvider({ children }: AppProviderProps) {
 
   return (
     <QueryClientProvider client={queryClient}>
-
       <QueryErrorResetBoundary>
         {({ reset }) => (
           <ErrorBoundary onReset={reset} FallbackComponent={GlobalError}>
