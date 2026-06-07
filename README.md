@@ -1,3 +1,5 @@
+# Frontend Assessment — Bills Viewer
+
 ## Tech Stack
 
 - React 19
@@ -23,6 +25,14 @@ npm run dev
 ### Running tests
 
 npm run test
+
+### Linting
+
+npm run lint
+
+### Building for production
+
+npm run build
 
 ## Features
 
